@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Clients</title>
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Style pour la barre de navigation */
+        .navbar {
+            background-color: #007a79;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #d4f1f4;
+        }
+
+        /* Conteneur principal pour la table */
+        .table-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Titre principal */
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #007a79;
+            margin-bottom: 20px;
+        }
+
+        /* Table stylisée */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            color: #333;
+        }
+
+        thead {
+            background-color: #e0f7fa;
+            color: #00796b;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Bouton Voir Commandes */
+        .action-button {
+            background-color: #5bc0de;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #39a2c7;
+        }
+
+        /* Liens pour les actions */
+        .table-actions {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<div class="navbar">
+    <a href="/accueil" class="active">Accueil</a>
+    <a th:href="@{/clients}">Liste des Clients</a>
+    <a href="/inscription">Inscription Client</a>
+    <a href="/produits">Liste des Produits</a>
+    <a href="/contact">Contactez-nous</a>
+</div>
+
+<!-- Contenu principal -->
+<div class="table-container">
+    <h1>Liste des Clients</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.nom}"></td>
+            <td th:text="${client.email}"></td>
+            <td th:text="${client.adresse}"></td>
+            <td class="table-actions">
+                <a th:href="@{/client/{id}/commandes(id=${client.id})}" class="action-button">Voir Commandes</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

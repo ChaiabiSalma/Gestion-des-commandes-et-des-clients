@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Produits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Styles généraux */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Conteneur principal */
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Titre */
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    /* Table des produits */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007a79;
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Liens d'action */
+    .action-links {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .action-links a {
+        background-color: #007a79;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 0 10px;
+        transition: background-color 0.3s;
+    }
+
+    .action-links a:hover {
+        background-color: #005f5f;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Liste des Produits</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prix (DH)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="produit : ${produits}">
+      <td th:text="${produit.nom}">Nom du produit</td>
+      <td th:text="${produit.prix}">Prix du produit</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="action-links">
+    <a th:href="@{/produit/nouveau}">Ajouter un Nouveau Produit</a>
+    <a th:href="@{/clients}">Retour à la Liste des Clients</a>
+  </div>
+</div>
+
+</body>
+</html>

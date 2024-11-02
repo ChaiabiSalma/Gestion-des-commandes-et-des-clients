@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Inscription d'un Client</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Error Message */
+        .error-message {
+            background-color: #ffefef;
+            color: #d9534f;
+            padding: 10px;
+            border: 1px solid #d9534f;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Submit Button */
+        button {
+            background-color: #007a79;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005f5f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Inscription d'un Nouveau Client</h1>
+
+    <!-- Error Message -->
+    <div th:if="${errorMessage}" class="error-message">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <!-- Registration Form -->
+    <form action="/inscription" method="post">
+        <label>Nom:</label>
+        <input type="text" name="nom" required>
+
+        <label>Adresse:</label>
+        <input type="text" name="adresse" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <button type="submit">Créer Nouveau Compte</button>
+    </form>
+</div>
+
+</body>
+</html>

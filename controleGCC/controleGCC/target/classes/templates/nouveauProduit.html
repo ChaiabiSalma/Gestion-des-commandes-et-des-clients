@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nouveau Produit</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Conteneur */
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Titre */
+        h1 {
+            color: #333;
+        }
+
+        /* Style du formulaire */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Bouton de soumission */
+        button {
+            background-color: #007a79;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005f5f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ajouter un Nouveau Produit</h1>
+    <form action="/produit/nouveau" method="post" th:object="${produit}">
+        <label>Nom :</label>
+        <input type="text" name="nom" required>
+
+        <label>Prix :</label>
+        <input type="number" name="prix" step="0.01" required>
+
+        <button type="submit">Ajouter le Produit</button>
+    </form>
+</div>
+
+</body>
+</html>

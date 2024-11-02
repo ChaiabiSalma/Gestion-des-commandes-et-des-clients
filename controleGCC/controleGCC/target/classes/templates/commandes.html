@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Commandes de <span th:text="${client.nom}"></span></title>
+    <style>
+        /* Styles de base */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Barre de navigation */
+        .navbar {
+            background-color: #007a79;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+        }
+
+        .navbar a:hover {
+            background-color: #005f5b;
+        }
+
+        /* Conteneur principal */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Barre latérale */
+        .sidebar {
+            width: 250px;
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 8px;
+            color: #00796b;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #00796b;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #b2dfdb;
+        }
+
+        /* Zone de contenu */
+        .content {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Style de la table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        thead {
+            background-color: #f4f4f4;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr {
+            transition: background-color 0.3s;
+        }
+
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        /* Boutons d'action */
+        .action-button {
+            display: inline-block;
+            background-color: #5bc0de;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .action-button:hover {
+            background-color: #39a2c7;
+            transform: translateY(-2px);
+        }
+
+        /* Montants */
+        .amount {
+            font-weight: bold;
+            color: #00796b;
+        }
+
+        /* Lien pour ajouter une nouvelle commande */
+        .action-links {
+            margin-top: 20px;
+        }
+
+        .action-links a {
+            display: inline-block;
+            background-color: #00796b;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .action-links a:hover {
+            background-color: #005f5b;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <a th:href="@{/clients}">Liste des Clients</a>
+    <a th:href="@{/inscription}">Inscription Client</a>
+    <a th:href="@{/produits}">Liste des Produits</a>
+    <a th:href="@{/contact}">Contactez-nous</a>
+</div>
+
+<div class="container">
+    <!-- Sidebar -->
+
+
+    <!-- Zone de contenu -->
+    <div class="content">
+        <h1>Mes Commandes</h1>
+        <p>Vos commandes récentes sont affichées dans le tableau ci-dessous.</p>
+        <table>
+            <thead>
+            <tr>
+                <th>Commande</th>
+                <th>Date</th>
+                <th>État</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="commande : ${commandes}">
+                <td th:text="'n°' + ${commande.id}">ID Commande</td>
+                <td th:text="${#dates.format(commande.date, 'dd/MM/yyyy')}">Date</td>
+                <td>Terminée</td> <!-- Remplacez par un th:text pour l'état réel si disponible -->
+                <td class="amount" th:text="${commande.montantTotal + ' MAD'}">Montant Total</td>
+                <td><a th:href="@{/commande/{commandeId}/produits(commandeId=${commande.id})}" class="action-button">Voir</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="action-links">
+            <a th:href="@{/client/{clientId}/commande/nouvelle(clientId=${client.id})}">Ajouter une nouvelle commande</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
